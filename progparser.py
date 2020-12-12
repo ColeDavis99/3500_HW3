@@ -1,0 +1,3 @@
+dog = input()
+
+print(dog)
