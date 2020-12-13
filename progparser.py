@@ -3,8 +3,9 @@ from sys import stdin
 
 
 
-def retRegex(inp):
-    keywordPat = '(!|:|:=|+|-|*|/|OR|AND|~|(|)|<|>|=|#|;|FUNC|IF|ELSE|PRINT|RETURN|END)'
+def retRegex(word):
+    keywordList = ["!", ":" ,":=", "+", "-", "*", "/", "OR", "AND", "~", "(", ")", "<", ">", "=", "#", ";", "FUNC", "IF", "ELSE", "WHILE", "PRINT", "RETURN", "END"]
+    
     '''
     identPat =  ''
     intPat = ''
@@ -12,30 +13,37 @@ def retRegex(inp):
     strPat = ''
     '''
 
-    if(re.match(keywordPat, inp)):
-        print("ITS A KEYWORD!")
+    if(word in keywordList):              
+        print("ITS A KEYWORD!") 
     else:
         print("NOT A KEYWORD")
+    
+    print(word)
+    print()
 
-
-
-
-
+####################################
 #Read in input for this program
+####################################
 inputData = ""
 for line in stdin:
     inputData += line
-    
+
+
+######################################################
+#Loop through each space-separated work from the input
+######################################################
 word=""
 for char in inputData:
     if(char == "\n" or char == " "):
-        print(word, end="")       
+        #print(word, end="")       
         #Do processing here and stuff
+        retRegex(word)
         
         #Clear word for next one to identify        
         word = ""
 
     else:
+        #Continue building the word, char by char
         word += char
 
 '''

@@ -1,3 +1,2 @@
-IF END WHILE :
-IF END WHILE dog
-cat END wub
+! : :=
++ - * / OR AND ~ ( ) () < > = x
