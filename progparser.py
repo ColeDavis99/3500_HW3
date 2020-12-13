@@ -9,7 +9,7 @@ def staticCtr(inc_dec):
     return(staticCtr.counter)
 
 #Attribute must be initialized
-staticCtr.counter = 0
+staticCtr.counter = -1
 
 
 #Get the next token to parse
@@ -19,7 +19,7 @@ def getToken(tokenList, inc_dec):
     print()
     print()
 
-    if(staticCtr(0) > len(tokenList)):
+    if(staticCtr(0) >= len(tokenList)):
         print("Error: Unexpected end of line")
         return("Error: Unexpected end of line")
     else:
@@ -97,13 +97,13 @@ def parseFunctionDeclaration(tokenList):
                 if(token == ")"):
                     parseStatementSequence(tokenList)
                 else:
-                    return("Error parsing function declaration, expecting \")\"")
+                    print("Error parsing function declaration, expecting \")\"")
             else:
-                return("Error parsing function declaration, expecting \"(\"")
+                print("Error parsing function declaration, expecting \"(\"")
         else:
-            return("Error parsing function declaration, expecting identifier")        
+            print("Error parsing function declaration, expecting identifier")        
     else:
-        return("Error parsing function declaration, expecting FUNC")
+        print("Error parsing function declaration, expecting FUNC")
 
 #Parse ParamSequence
 def parseParamSequence(tokenList):
