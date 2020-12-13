@@ -6,12 +6,10 @@ from sys import stdin
 def retRegex(word):
     keywordList = ["!", ":" ,":=", "+", "-", "*", "/", "OR", "AND", "~", "(", ")", "<", ">", "=", "#", ";", "FUNC", "IF", "ELSE", "WHILE", "PRINT", "RETURN", "END"]    
     intPat = '^[+|-]?[0-9]+$'
+    decPat = '^[+|-]?[0-9]+[.][0-9]+$'
+    strPat = '^[\"][\S]*[\"]$'
+    identPat = '^[a-zA-z][a-zA-z0-9]*$'
 
-    '''
-    identPat =  ''
-    decPat = ''
-    strPat = ''
-    '''
 
     #Keyword check
     if(word in keywordList):              
@@ -24,7 +22,26 @@ def retRegex(word):
     if(re.match(intPat, word)):
         print("Its an INT")
     else:
-        print("Not an int")    
+        print("Not an int")
+
+    #Decimal check
+    if(re.match(decPat, word)):
+        print("Its a DEC")
+    else:
+        print("Not a DEC")
+
+    #String check
+    if(re.match(strPat, word)):
+        print("Its a STRING")
+    else:
+        print("Not a STRING")
+
+
+    #Identifier
+    if(re.match(identPat, word)):
+        print("Its an identifier")
+    else:
+        print("Not an identifier")
 
     print(word)
     print()
