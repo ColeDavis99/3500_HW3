@@ -19,7 +19,7 @@ def getToken(tokenList, inc_dec):
     print()
     print()
 
-    if(staticCtr(0) >= len(tokenList)):
+    if(staticCtr(0) >= len(tokenList)-1):
         print("Error: Unexpected end of line")
         return("Error: Unexpected end of line")
     else:
