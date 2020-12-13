@@ -4,20 +4,28 @@ from sys import stdin
 
 
 def retRegex(word):
-    keywordList = ["!", ":" ,":=", "+", "-", "*", "/", "OR", "AND", "~", "(", ")", "<", ">", "=", "#", ";", "FUNC", "IF", "ELSE", "WHILE", "PRINT", "RETURN", "END"]
-    
+    keywordList = ["!", ":" ,":=", "+", "-", "*", "/", "OR", "AND", "~", "(", ")", "<", ">", "=", "#", ";", "FUNC", "IF", "ELSE", "WHILE", "PRINT", "RETURN", "END"]    
+    intPat = '^[+|-]?[0-9]+$'
+
     '''
     identPat =  ''
-    intPat = ''
     decPat = ''
     strPat = ''
     '''
 
+    #Keyword check
     if(word in keywordList):              
-        print("ITS A KEYWORD!") 
+        print("Its a KEYWORD!") 
     else:
-        print("NOT A KEYWORD")
+        print("Not a KEYWORD")
     
+
+    #Int check
+    if(re.match(intPat, word)):
+        print("Its an INT")
+    else:
+        print("Not an int")    
+
     print(word)
     print()
 
@@ -47,7 +55,6 @@ for char in inputData:
         word += char
 
 '''
-    (WHILE|ELSE|IF|PRINT)               {   pretty_print(tokens);   fout << "KEYWORD    LEXEME: " << yytext << endl;    tokens++;   }
     [+|-]?[0-9]+                        {   pretty_print(tokens);   fout << "INTCONST   LEXEME: " << yytext << endl;    tokens++;   }
     [+|-]?[0-9]+\.[0-9]+                {   pretty_print(tokens);   fout << "DECCONST   LEXEME: " << yytext << endl;    tokens++;   }
     \"[^ \n\t\r]*\"                     {   pretty_print(tokens);   fout << "STRCONST   LEXEME: " << yytext << endl;    tokens++;   }
