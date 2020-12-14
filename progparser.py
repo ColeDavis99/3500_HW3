@@ -1,7 +1,13 @@
+# Cole Davis        
+# CS3500 Homework #3 
+# Professor Morales 
+#####################
+
+
 import re
 from sys import stdin
 
-#For marching through tokenList
+#For progressing through tokenList
 global i
 i=0
 global tokenList
@@ -100,6 +106,21 @@ def Factor():
         i+=1
         Factor()
 
+def RetStatement():
+    global i
+
+    if(tokenList[i] == "RETURN"):
+        i+=1
+        if(retRegex(tokenList[i]) == "ident"):
+            i+=1
+            return True
+        else:
+            print("Rejected, in RetStatement() expected identifier")
+            return False
+    else:
+        print("Rejected, in RetStatement() expected RETURN")
+        return False
+
 def MulOperator():
     if(tokenList[i] in ["*", "/", "AND"]):
         return True
@@ -175,8 +196,7 @@ def FunctionDeclaration():
                 if(tokenList[i] == ")"):
                     i+=1
                     StatementSequence()
-                    #RetStatement()
-                    print(tokenList[i] + "WOW!!!")
+                    RetStatement()
                     if(tokenList[i] == "END."):
                         return True
                     else:
