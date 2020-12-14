@@ -173,9 +173,26 @@ def Assignment():
             i+=1
             Expression()
 
+def PrintStatement():
+    global i
+
+    if(tokenList[i] == "PRINT"):
+        i+=1
+        if(tokenList[i] == "("):
+            Expression()
+            i+=1
+            if(tokenList[i] == ")"):
+                return True
+
 def Statement():
     global i
-    Assignment()
+    temp_i = i  #Store for backtracking
+    
+    if(Assignment() == False):
+        i = temp_i
+
+    elif(PrintStatement() == False):
+        i = temp_i    
 
 def StatementSequence():
     global i    

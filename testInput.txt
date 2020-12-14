@@ -2,6 +2,7 @@ FUNC main ( )
     dog := 8 !
     cat := ~ dog !
     cat := ( 8 > 9 ) !
+    PRINT ( 8 ) !
 
     RETURN meme
 END.
