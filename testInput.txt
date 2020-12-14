@@ -1,5 +1,5 @@
 FUNC main ( )
     dog := 8 !
-    cat := 7 !
+    cat := ~ dog !
     cat := ( 8 > 9 ) !
 END.

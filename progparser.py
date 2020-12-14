@@ -96,6 +96,9 @@ def Factor():
         if(tokenList[i] == ")"):
             i+=1
             return True
+    elif(tokenList[i] == "~"):
+        i+=1
+        Factor()
 
 def MulOperator():
     if(tokenList[i] in ["*", "/", "AND"]):
