@@ -86,22 +86,55 @@ for token in tokenList:
 def Factor():
     global i
     print("In Factor(): " + tokenList[i])
+
     if(retRegex(tokenList[i]) == "int" or retRegex(tokenList[i]) == "dec" or retRegex(tokenList[i]) == "str" or retRegex(tokenList[i]) == "ident"):
         i+=1
         return True
+    elif(tokenList[i] == "("):
+        i+=1
+        Expression()
+        if(tokenList[i] == ")"):
+            return True
+
+def MulOperator():
+    if(tokenList[i] in ["*", "/", "AND"]):
+        return True
+    return False
 
 def Term():
     global i
     Factor()
+    while(MulOperator()):
+        i+=1
+        Factor()
     
+
+def AddOperator():
+    print("In AddOperator(): " + tokenList[i])
+    if(tokenList[i] in ["+", "-", "OR", "&"]):
+        return True
+    return False
+
 
 def SimpleExpression():
     global i    
     Term()
+    while(AddOperator()):
+        i+=1
+        Term()        
+
+def Relation():
+    if(tokenList[i] in ["<", ">", "=", "#"]):
+        return True
+    return False
 
 def Expression():
     global i
     SimpleExpression()
+    if(Relation()):
+        i+=1
+        SimpleExpression()
+        
     
 
 def Assignment():
