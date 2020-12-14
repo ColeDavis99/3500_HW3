@@ -123,7 +123,7 @@ def IfStatement():
                 i+=1
                 return True
             else:
-                print("REJECTED, in IfStatement() expected ';'")
+                print("REJECTED, in IfStatement() expected ';' but got " + tokenList[i])
                 return False
         else:
             print("REJECTED, in IfStatement() expected ';'")

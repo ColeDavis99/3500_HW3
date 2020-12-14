@@ -8,5 +8,8 @@ FUNC main ( n , i )
         PRINT ( cat ) !
         PRINT ( dog ) !
         PRINT ( "WOW" ) !
+    ELSE
+        PRINT ( "WUB" ) !
+        dog := ( 6 > 3 ) !    
     ;
 END.
