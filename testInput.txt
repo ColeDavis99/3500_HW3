@@ -1,15 +1,20 @@
-FUNC main ( n , i )
-    dog := 8 !
-    cat := ~ dog !
-    cat := ( 8 > 9 ) !
-    PRINT ( 8 ) !
-    
-    IF cat > dog :
-        PRINT ( cat ) !
-        PRINT ( dog ) !
-        PRINT ( "WOW" ) !
+FUNC gcd ( a , b ) 
+  WHILE a # b :
+    IF a > b : 
+      a := a - b
     ELSE
-        PRINT ( "WUB" ) !
-        dog := ( 6 > 3 ) !    
+      b := b - a 
     ;
+  ;
+RETURN a
+END.
+
+
+FUNC hello ( )
+  PRINT ( "Hello" & "World!" ) 
+END. 
+
+FUNC GRUB ( n )
+    PRINT ( n ) !
+    PRINT ( 6 * 7 ) !
 END.

@@ -129,6 +129,27 @@ def IfStatement():
             print("REJECTED, in IfStatement() expected ';'")
             return False    
 
+def WhileStatement():
+    global i
+    print("In while(): " + tokenList[i])
+
+    if(tokenList[i] == "WHILE"):
+        i+=1
+        Expression()
+        if(tokenList[i] == ":"):
+            i+=1
+            StatementSequence()
+            if(tokenList[i] == ";"):
+                i+=1
+                return True
+            else:
+                print("REJECTED, in WhileStatement() expected ';' but got " + tokenList[i])
+                return False
+        else:
+            print("REJECTED, in WhileStatement() expected ':' but got " + tokenList[i])
+            return False
+    return False
+
 def RetStatement():
     global i
     print("In RetStatement(): " + tokenList[i])
@@ -216,10 +237,15 @@ def ParamSequence():
             print("In ParamSequence() :" + tokenList[i])
             if(retRegex(tokenList[i]) == "ident"):
                 i+=1
+            else:
+                print("REJECTED in ParamSequence, expected identifier, got " + tokenList[i])
+                return False
 
 
 def PrintStatement():
     global i
+
+    print("Top of print: " + tokenList[i])
 
     if(tokenList[i] == "PRINT"):
         i+=1
@@ -228,6 +254,7 @@ def PrintStatement():
             Expression()
             if(tokenList[i] == ")"):
                 i+=1
+                print("WE GOOD IN PRINT WTHeck?")
                 return True
             else:
                 print("REJECTED in PrintStatement(), expected ')'")
@@ -258,6 +285,13 @@ def Statement():
         return True
     else:
         i = temp_i
+
+    if(WhileStatement()):
+        return True
+
+
+    print("REJECTED in Statement(). Expected a statement of some sort assignment, print, if, or while")
+    return False
     
 
 def StatementSequence():
@@ -281,12 +315,11 @@ def FunctionDeclaration():
                 ParamSequence()
                 if(tokenList[i] == ")"):
                     i+=1
-                    print("BEFORE: " + str(i))
                     StatementSequence()
-                    print("AFTER: " + str(i))
                     RetStatement()
-
+                    print("HERE's what we got: " + tokenList[i])
                     if(tokenList[i] == "END."):
+                        i+=1
                         return True
                     else:
                         print("REJECTED, in FunctionalDeclaration() expected 'END.' but got " + tokenList[i])
@@ -307,8 +340,17 @@ def FunctionDeclaration():
                 
 
 def FunctionSequence():
-    if(FunctionDeclaration()):
-        return True
+    global i
+    result = False
+
+    result = FunctionDeclaration()
+
+
+    while(i < len(tokenList)):
+        result = FunctionDeclaration()
+
+    return result
+
 
 
 ##########################
