@@ -106,9 +106,31 @@ def Factor():
         i+=1
         Factor()
 
+def IfStatement():
+    global i
+    print("In IFStatement(): " + tokenList[i])    
+
+    if(tokenList[i] == "IF"):
+        i+=1
+        Expression()
+        if(tokenList[i] == ":"):
+            i+=1
+            StatementSequence()
+            if(tokenList[i] == "ELSE"):
+                StatementSequence()
+            if(tokenList[i] == ";"):
+                return True
+            else:
+                print("REJECTED, in IfStatement() expected ';'")
+                return False
+        else:
+            print("REJECTED, in IfStatement() expected ';'")
+            return False    
+
 def RetStatement():
     global i
-
+    print("In RetStatement(): " + tokenList[i])
+   
     if(tokenList[i] == "RETURN"):
         i+=1
         if(retRegex(tokenList[i]) == "ident"):
@@ -117,9 +139,6 @@ def RetStatement():
         else:
             print("Rejected, in RetStatement() expected identifier")
             return False
-    else:
-        print("Rejected, in RetStatement() expected RETURN")
-        return False
 
 def MulOperator():
     if(tokenList[i] in ["*", "/", "AND"]):
@@ -128,6 +147,7 @@ def MulOperator():
 
 def Term():
     global i
+    print("In Term(): " + tokenList[i])
     Factor()
     while(MulOperator()):
         i+=1
@@ -135,20 +155,27 @@ def Term():
     
 
 def AddOperator():
+    global i
     print("In AddOperator(): " + tokenList[i])
+    
     if(tokenList[i] in ["+", "-", "OR", "&"]):
         return True
     return False
 
 
 def SimpleExpression():
-    global i    
+    global i
+    print("In SimpleExpression(): " + tokenList[i])
+    
     Term()
     while(AddOperator()):
         i+=1
-        Term()        
+        Term()
+      
 
 def Relation():
+    global i
+
     if(tokenList[i] in ["<", ">", "=", "#"]):
         return True
     return False
@@ -161,17 +188,21 @@ def Expression():
         SimpleExpression()
         
     
-
 def Assignment():
     global i
-
     print("In assignment: " + tokenList[i])
+
     if(retRegex(tokenList[i]) == "ident"):
         i+=1
         print("In assignment: " + tokenList[i])
         if(tokenList[i] == ":="):
             i+=1
             Expression()
+            return True
+        else:
+            return False
+    else:
+        return False
 
 def ParamSequence():
     global i
@@ -191,31 +222,49 @@ def PrintStatement():
     if(tokenList[i] == "PRINT"):
         i+=1
         if(tokenList[i] == "("):
-            Expression()
             i+=1
+            Expression()
             if(tokenList[i] == ")"):
+                i+=1
                 return True
+            else:
+                print("REJECTED in PrintStatement(), expected ')'")
+                return False
+            
+        else:
+            print("REJECTED in PrintStatement(), expected '('")
+            return False
+    else:
+        return False
 
-def IfStatement():
-    global i
-    pass
 
 def Statement():
     global i
     temp_i = i  #Store for backtracking
     
-    if(Assignment() == False):
+    if(Assignment()):
+        return True
+    else:
         i = temp_i
 
-    elif(PrintStatement() == False):
-        i = temp_i  
+    if(PrintStatement()):
+        return True
+    else:
+        i = temp_i
 
-    elif(IfStatement() == False):
-        i =temp_i  
+    '''
+    if(IfStatement()):
+        return True
+    else:
+        i = temp_i
+    '''
 
 def StatementSequence():
-    global i    
+    global i
+    print("In StatementSequence(): " + tokenList[i])
+
     Statement()
+
     while(tokenList[i] == "!"):
         i+=1        
         Statement()
@@ -231,12 +280,15 @@ def FunctionDeclaration():
                 ParamSequence()
                 if(tokenList[i] == ")"):
                     i+=1
+                    print("BEFORE: " + str(i))
                     StatementSequence()
+                    print("AFTER: " + str(i))
                     RetStatement()
+
                     if(tokenList[i] == "END."):
                         return True
                     else:
-                        print("REJECTED, in FunctionalDeclaration() expected 'END.'")
+                        print("REJECTED, in FunctionalDeclaration() expected 'END.' but got " + tokenList[i])
                         return False
                 else:
                     print("REJECTED, in FunctionalDeclaration() expected ')'")

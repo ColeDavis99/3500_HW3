@@ -3,6 +3,6 @@ FUNC main ( n , i )
     cat := ~ dog !
     cat := ( 8 > 9 ) !
     PRINT ( 8 ) !
+    PRINT ( cat ) !
 
-    RETURN meme
 END.
