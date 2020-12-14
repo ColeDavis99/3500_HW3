@@ -1,4 +1,4 @@
-FUNC main ( )
+FUNC main ( n , i )
     dog := 8 !
     cat := ~ dog !
     cat := ( 8 > 9 ) !

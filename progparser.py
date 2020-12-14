@@ -173,6 +173,18 @@ def Assignment():
             i+=1
             Expression()
 
+def ParamSequence():
+    global i
+
+    if(retRegex(tokenList[i]) == "ident"):
+        i+=1
+        while(tokenList[i] == ","):
+            i+=1
+            print("In ParamSequence() :" + tokenList[i])
+            if(retRegex(tokenList[i]) == "ident"):
+                i+=1
+
+
 def PrintStatement():
     global i
 
@@ -209,7 +221,7 @@ def FunctionDeclaration():
             i+=1
             if(tokenList[i] == "("):
                 i+=1
-                #ParamSequence()
+                ParamSequence()
                 if(tokenList[i] == ")"):
                     i+=1
                     StatementSequence()
