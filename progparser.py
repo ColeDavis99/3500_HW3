@@ -196,6 +196,10 @@ def PrintStatement():
             if(tokenList[i] == ")"):
                 return True
 
+def IfStatement():
+    global i
+    pass
+
 def Statement():
     global i
     temp_i = i  #Store for backtracking
@@ -204,7 +208,10 @@ def Statement():
         i = temp_i
 
     elif(PrintStatement() == False):
-        i = temp_i    
+        i = temp_i  
+
+    elif(IfStatement() == False):
+        i =temp_i  
 
 def StatementSequence():
     global i    
