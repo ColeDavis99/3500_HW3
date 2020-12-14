@@ -281,7 +281,7 @@ def Statement():
         return True
 
 
-    print("REJECTED in Statement(). Expected a statement of some sort assignment, print, if, or while")
+    #print("REJECTED in Statement(). Expected a statement of some sort assignment, print, if, or while")
     return False
     
 

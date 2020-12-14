@@ -18,3 +18,87 @@ FUNC GRUB ( n )
     PRINT ( n ) !
     PRINT ( 6 * 7 ) !
 END.
+
+FUNC gcd ( a , b ) 
+  WHILE a # b :
+    IF a > b : 
+      a := a - b
+    ELSE
+      b := b - a 
+    ;
+  ;
+RETURN a
+END.
+
+
+FUNC hello ( )
+  PRINT ( "Hello" & "World!" ) 
+END. 
+
+FUNC GRUB ( n )
+    PRINT ( n ) !
+    PRINT ( 6 * 7 ) !
+END.
+
+FUNC gcd ( a , b ) 
+  WHILE a # b :
+    IF a > b : 
+      a := a - b
+    ELSE
+      b := b - a 
+    ;
+  ;
+RETURN a
+END.
+
+
+FUNC hello ( )
+  PRINT ( "Hello" & "World!" ) 
+END. 
+
+FUNC GRUB ( n )
+    PRINT ( n ) !
+    PRINT ( 6 * 7 ) !
+END.
+
+FUNC gcd ( a , b ) 
+  WHILE a # b :
+    IF a > b : 
+      a := a - b
+    ELSE
+      b := b - a 
+    ;
+  ;
+RETURN a
+END.
+
+
+FUNC hello ( )
+  PRINT ( "Hello" & "World!" ) 
+END. 
+
+FUNC GRUB ( n )
+    PRINT ( n ) !
+    PRINT ( 6 * 7 ) !
+END.
+
+FUNC gcd ( a , b ) 
+  WHILE a # b :
+    IF a > b : 
+      a := a - b
+    ELSE
+      b := b - a 
+    ;
+  ;
+RETURN a
+END.
+
+
+FUNC hello ( )
+  PRINT ( "Hello" & "World!" ) 
+END. 
+
+FUNC GRUB ( n )
+    PRINT ( n ) !
+    PRINT ( 6 * 7 ) !
+END.
