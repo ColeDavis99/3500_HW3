@@ -117,8 +117,10 @@ def IfStatement():
             i+=1
             StatementSequence()
             if(tokenList[i] == "ELSE"):
+                i+=1
                 StatementSequence()
             if(tokenList[i] == ";"):
+                i+=1
                 return True
             else:
                 print("REJECTED, in IfStatement() expected ';'")
@@ -252,12 +254,11 @@ def Statement():
     else:
         i = temp_i
 
-    '''
     if(IfStatement()):
         return True
     else:
         i = temp_i
-    '''
+    
 
 def StatementSequence():
     global i
