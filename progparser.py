@@ -150,7 +150,7 @@ def Assignment():
 
 def Statement():
     global i    
-    return Assignment()
+    Assignment()
 
 def StatementSequence():
     global i    
@@ -171,7 +171,7 @@ def FunctionDeclaration():
                     i+=1
                     StatementSequence()
                     #RetStatement()
-                    
+                    i+=1
                     if(tokenList[i] == "END."):
                         return True
                     else:
