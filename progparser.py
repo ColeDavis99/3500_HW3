@@ -91,7 +91,6 @@ for token in tokenList:
 
 def Factor():
     global i
-    print("In Factor(): " + tokenList[i])
 
     if(retRegex(tokenList[i]) == "int" or retRegex(tokenList[i]) == "dec" or retRegex(tokenList[i]) == "str" or retRegex(tokenList[i]) == "ident"):
         i+=1
@@ -108,7 +107,6 @@ def Factor():
 
 def IfStatement():
     global i
-    print("In IFStatement(): " + tokenList[i])    
 
     if(tokenList[i] == "IF"):
         i+=1
@@ -131,7 +129,6 @@ def IfStatement():
 
 def WhileStatement():
     global i
-    print("In while(): " + tokenList[i])
 
     if(tokenList[i] == "WHILE"):
         i+=1
@@ -152,7 +149,7 @@ def WhileStatement():
 
 def RetStatement():
     global i
-    print("In RetStatement(): " + tokenList[i])
+
    
     if(tokenList[i] == "RETURN"):
         i+=1
@@ -170,7 +167,7 @@ def MulOperator():
 
 def Term():
     global i
-    print("In Term(): " + tokenList[i])
+
     Factor()
     while(MulOperator()):
         i+=1
@@ -179,7 +176,6 @@ def Term():
 
 def AddOperator():
     global i
-    print("In AddOperator(): " + tokenList[i])
     
     if(tokenList[i] in ["+", "-", "OR", "&"]):
         return True
@@ -188,7 +184,6 @@ def AddOperator():
 
 def SimpleExpression():
     global i
-    print("In SimpleExpression(): " + tokenList[i])
     
     Term()
     while(AddOperator()):
@@ -213,11 +208,10 @@ def Expression():
     
 def Assignment():
     global i
-    print("In assignment: " + tokenList[i])
 
     if(retRegex(tokenList[i]) == "ident"):
         i+=1
-        print("In assignment: " + tokenList[i])
+
         if(tokenList[i] == ":="):
             i+=1
             Expression()
@@ -234,7 +228,6 @@ def ParamSequence():
         i+=1
         while(tokenList[i] == ","):
             i+=1
-            print("In ParamSequence() :" + tokenList[i])
             if(retRegex(tokenList[i]) == "ident"):
                 i+=1
             else:
@@ -245,7 +238,6 @@ def ParamSequence():
 def PrintStatement():
     global i
 
-    print("Top of print: " + tokenList[i])
 
     if(tokenList[i] == "PRINT"):
         i+=1
@@ -254,7 +246,6 @@ def PrintStatement():
             Expression()
             if(tokenList[i] == ")"):
                 i+=1
-                print("WE GOOD IN PRINT WTHeck?")
                 return True
             else:
                 print("REJECTED in PrintStatement(), expected ')'")
@@ -296,7 +287,6 @@ def Statement():
 
 def StatementSequence():
     global i
-    print("In StatementSequence(): " + tokenList[i])
 
     Statement()
 
@@ -317,7 +307,6 @@ def FunctionDeclaration():
                     i+=1
                     StatementSequence()
                     RetStatement()
-                    print("HERE's what we got: " + tokenList[i])
                     if(tokenList[i] == "END."):
                         i+=1
                         return True
@@ -346,7 +335,7 @@ def FunctionSequence():
     result = FunctionDeclaration()
 
 
-    while(i < len(tokenList)):
+    while(i < len(tokenList) and result == True):
         result = FunctionDeclaration()
 
     return result
