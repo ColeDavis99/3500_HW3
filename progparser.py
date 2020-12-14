@@ -94,6 +94,7 @@ def Factor():
         i+=1
         Expression()
         if(tokenList[i] == ")"):
+            i+=1
             return True
 
 def MulOperator():
@@ -149,13 +150,14 @@ def Assignment():
             Expression()
 
 def Statement():
-    global i    
+    global i
     Assignment()
 
 def StatementSequence():
     global i    
     Statement()
     while(tokenList[i] == "!"):
+        i+=1        
         Statement()
 
 def FunctionDeclaration():
@@ -171,7 +173,7 @@ def FunctionDeclaration():
                     i+=1
                     StatementSequence()
                     #RetStatement()
-                    i+=1
+                    print(tokenList[i] + "WOW!!!")
                     if(tokenList[i] == "END."):
                         return True
                     else:
